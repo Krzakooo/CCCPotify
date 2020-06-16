@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="jquery.js"></script>
+    <script src="net.js"></script>
+    <script src="ui.js"></script>
+    <script src="main.js"></script>
+    <script>
+
+    </script>
+    <title>CCCP'otify</title>
+    <link rel="shortcut icon" type="image/png" href="https://i.ya-webdesign.com/images/soviet-star-png-3.png">
+</head>
+
+<body>
+    <div id="audioUI">
+        <div id="previous"><svg xmlns="http://www.w3.org/2000/svg" height="80" viewBox="0 0 24 24" width="80">
+                <path
+                    d="M7 6c.55 0 1 .45 1 1v10c0 .55-.45 1-1 1s-1-.45-1-1V7c0-.55.45-1 1-1zm3.66 6.82l5.77 4.07c.66.47 1.58-.01 1.58-.82V7.93c0-.81-.91-1.28-1.58-.82l-5.77 4.07c-.57.4-.57 1.24 0 1.64z" />
+            </svg></div>
+        <div id="play"><svg xmlns="http://www.w3.org/2000/svg" height="80" viewBox="0 0 24 24" width="80">
+                <path
+                    d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z" />
+            </svg></div>
+        <div id="next"><svg xmlns="http://www.w3.org/2000/svg" height="80" viewBox="0 0 24 24" width="80">
+                <path
+                    d="M7.58 16.89l5.77-4.07c.56-.4.56-1.24 0-1.63L7.58 7.11C6.91 6.65 6 7.12 6 7.93v8.14c0 .81.91 1.28 1.58.82zM16 7v10c0 .55.45 1 1 1s1-.45 1-1V7c0-.55-.45-1-1-1s-1 .45-1 1z" />
+            </svg></div>
+        <div id="timer">
+            0:00
+        </div>
+        <div id="songData">
+            
+        </div>
+    </div>
+    <audio id="audio" controls>
+        <source id="audio_src" type="audio/mp3" />
+    </audio>
+
+    <a href="https://www.youtube.com/watch?v=I5fenjzeh7g">
+        <div id="CryptonymCCCPASF"><img src="https://i.ya-webdesign.com/images/soviet-star-png-3.png" width="20"
+                height="20"></div>
+    </a>
+    <div id="albums"></div>
+    <a href="">
+        <div class="title"><img src="https://i.ya-webdesign.com/images/soviet-star-png-3.png"
+                height="40px">&nbsp;CCCP'otify&nbsp;<img src="https://i.ya-webdesign.com/images/soviet-star-png-3.png"
+                height="40px"></div>
+    </a>
+    <div id="songs">
+        <table id="songTable">
+
+        </table>
+    </div>
+
+    <script>
+        function fancyTimeFormat(time) {
+            // Hours, minutes and seconds
+            var mins = ~~((time % 3600) / 60);
+            var secs = ~~time % 60;
+
+            // Output like "1:01" or "4:03:59" or "123:03:59"
+            var ret = "";
+
+            ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+            ret += "" + secs;
+            return ret;
+        }
+
+        $("#audio").trigger(
+            "load"
+        ); // załaduj plik mp3
+
+        var playing = false
+        $("#play").click(function () {
+            if (playing == false) {
+                $("#audio").trigger("play");
+                playing = true
+            } else {
+                $("#audio").trigger("pause");
+                playing = false
+            }
+
+
+        })
+        $("#audio").on("play", function () {
+            console.log("song playing")
+            playing = true
+            $("#play").html(
+                '<svg xmlns="http://www.w3.org/2000/svg" height="80" viewBox="0 0 24 24" width="80"><path d="M8 19c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2s-2 .9-2 2v10c0 1.1.9 2 2 2zm6-12v10c0 1.1.9 2 2 2s2-.9 2-2V7c0-1.1-.9-2-2-2s-2 .9-2 2z"/></svg>'
+            )
+            setInterval(function () {
+                var count = $("#audio").prop("currentTime")
+                count = Math.round(count)
+                $("#timer").text(fancyTimeFormat(count))
+
+            }, 1000);
+        });
+        $("#audio").on("pause", function () {
+            console.log("song paused")
+            playing = false
+            $("#play").html(
+                '<svg xmlns="http://www.w3.org/2000/svg" height="80" viewBox="0 0 24 24" width="80"> <path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z" /> </svg>'
+            )
+
+        });
+        $("#audio").on("loadeddata", function () {
+            console.log("song loaded")
+            $("#timer").text("0:00")
+
+        })
+    </script>
+</body>
+
+</html>

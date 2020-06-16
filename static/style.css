@@ -1,0 +1,137 @@
+body{
+    background-color:rgb(215, 0, 0);
+    margin:0 auto;
+    color: gold;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    overflow: hidden;
+}
+.title{
+    position:absolute;
+    background-color:rgb(185, 0, 0);
+    color:gold;
+    font-size: 60px;
+    text-align: left;
+    line-height:100px;
+    height: 100px;
+    padding-left: 320px;
+    
+    width:1600px;
+}
+
+#albums{
+    background-color:rgb(185, 0, 0);
+    position:absolute;
+    left: 0; 
+    padding-top: 20px;
+    width:300px;
+    max-height: 100%;
+    overflow-y: scroll;
+    z-index: 2;
+}
+
+#songs{
+    position: absolute;
+    left:320px;
+    top: 120px;
+    width: 60%;
+    height:30px;
+    line-height:30px;
+    font-size:16px;
+}
+
+.albumCover {
+    margin-left: 10px;
+    margin-bottom: 20px;
+    opacity: 0.6;
+}
+#songTable{
+ width:100%;
+
+}
+tr{
+    width:inherit;
+    margin: 2px;
+    background-color:rgb(185, 0, 0);
+    height: 62px;
+}
+td{
+    text-align:center;
+    width: 20%;
+    font-size: 20px;
+}
+#CryptonymCCCPASF {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    opacity: 0;
+    
+}
+#CryptonymCCCPASF:hover {
+    opacity: 1;
+}
+
+#audio {
+    display: none;
+}
+
+#audioUI{
+    position: fixed;
+    background-color:rgb(185, 0, 0);
+    color:gold;
+    height: 80px;
+    bottom: 0;
+    
+    width: 1600px;
+    padding-left: 320px;
+
+    
+}
+#timer {
+    display: inline;
+    position: absolute;
+    bottom: 44px;
+}
+#songData {
+    display: inline;
+    position: absolute;
+    bottom: 16px;
+}
+#play {
+    display: inline;
+    
+    
+}
+#previous {
+    display: inline;
+   
+    
+}
+#next {
+    display: inline;
+    
+}
+svg {
+    fill: gold;
+}
+@media (hover: none) and (pointer: coarse) {
+    #audioUI{
+        top: 0;
+        height: 90px;
+        bottom: 0;
+        left: 0;
+        width: 280px;
+        padding-left:20px;
+        padding-top: 10px;
+        z-index: 99;
+        
+    }  
+    #albums{
+        padding-top: 100px;
+        
+    }
+    .albumCover {
+        margin-left: 20px;
+    }
+    
+  }
